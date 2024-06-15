@@ -7,7 +7,7 @@ import socket
 @click.command()
 @click.argument('target', type=str, required=True)
 @click.option('--lower', type=click.IntRange(0, 1_000_000_000), default=0, help='The lower limit of the search')
-@click.option('--upper', type=click.IntRange(0, 1_000_000_000), default=1500, help='The upper limit of the search')
+@click.option('--upper', type=click.IntRange(0, 1_000_000_000), default=3000, help='The upper limit of the search')
 @click.option('--verbose', '-v', is_flag=True, help='Display detailed information')
 @click.option('--count', '-c', type=click.IntRange(0, 100), default=3, help='The count of pings per test')
 @click.option('--interval', '-i', type=click.FloatRange(0, 5), default=0.1,
@@ -38,7 +38,7 @@ def main(target, lower, upper, verbose, count, interval, timeout):
                 count=count,
                 interval=interval,
                 timeout=timeout,
-                payload_size=mid,
+                payload_size=mid - 28,
             )
         except icmplib.exceptions.NameLookupError:
             print(f'Host {target} cannot be resolved')
